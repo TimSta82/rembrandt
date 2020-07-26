@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "275466049598",
+    "firebase_url": "https://rembrandt-d4029.firebaseio.com",
+    "project_id": "rembrandt-d4029",
+    "storage_bucket": "rembrandt-d4029.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:275466049598:android:13103c64fb45c485ff196f",
+        "android_client_info": {
+          "package_name": "de.bornholdtlee.rembrandt"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "275466049598-np0fn0vdsff9sm1481bag9j9gsv472u9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBwSCkEeNyVkXbE36FBnahZfvjDdUAU-Mo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "275466049598-np0fn0vdsff9sm1481bag9j9gsv472u9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
