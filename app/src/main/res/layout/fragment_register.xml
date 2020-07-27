@@ -22,6 +22,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="Password"
+        android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/register_user_email_Et" />
@@ -32,6 +33,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="Password repeat"
+        android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/register_user_password_Et" />

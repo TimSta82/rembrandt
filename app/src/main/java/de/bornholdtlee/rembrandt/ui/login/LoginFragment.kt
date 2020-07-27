@@ -1,4 +1,4 @@
-package de.bornholdtlee.rembrandt.ui.register
+package de.bornholdtlee.rembrandt.ui.login
 
 import android.os.Bundle
 import android.view.View
@@ -9,15 +9,16 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import de.bornholdtlee.rembrandt.R
-import kotlinx.android.synthetic.main.fragment_register.*
+import de.bornholdtlee.rembrandt.ui.register.Status
+import kotlinx.android.synthetic.main.fragment_login.*
 
-class RegisterFragment : Fragment(R.layout.fragment_register) {
+class LoginFragment : Fragment(R.layout.fragment_login) {
 
     companion object {
-        val TAG = RegisterFragment::class.java.name
+        val TAG = LoginFragment::class.java.name
     }
 
-    private val viewModel: RegisterViewModel by lazy { ViewModelProviders.of(this).get(RegisterViewModel::class.java) }
+    private val viewModel: LoginViewModel by lazy { ViewModelProviders.of(this).get(LoginViewModel::class.java) }
     private lateinit var auth: FirebaseAuth
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -30,27 +31,28 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
     }
 
     private fun initViews() {
-        register_loading_Pb.visibility = View.GONE
+        login_loading_Pb.visibility = View.GONE
     }
 
     private fun initListeners() {
-        register_submit_user_Btn.setOnClickListener { registerUser() }
+        login_submit_user_Btn.setOnClickListener { loginUser() }
+        login_forgot_password_Tv.setOnClickListener { forgotPassword() }
+        login_register_Tv.setOnClickListener { findNavController().navigate(R.id.registerFragment) }
     }
 
-    private fun registerUser() {
-        val email = register_user_email_Et.text.toString().trim()
-        val password = register_user_password_Et.text.toString().trim()
-        val passwordRepeat = register_user_password_repeat_Et.text.toString().trim()
+    private fun forgotPassword() {
+        Toast.makeText(requireContext(), TAG + "forgot password", Toast.LENGTH_SHORT).show()
+    }
 
-        if (email.isNotEmpty() && passwordIsValid(password, passwordRepeat)) {
-            viewModel.registerUser(auth, email, password)
+    private fun loginUser() {
+        val email = login_user_email_Et.text.toString().trim()
+        val password = login_user_password_Et.text.toString().trim()
+
+        if (email.isNotEmpty() && password.isNotEmpty()) {
+            viewModel.loginUser(auth, email, password)
         } else {
             Toast.makeText(requireContext(), TAG + " password is invalid", Toast.LENGTH_SHORT).show()
         }
-    }
-
-    private fun passwordIsValid(password: String, passwordRepeat: String): Boolean {
-        return password.length > 5 && password.isNotEmpty() && passwordRepeat.isNotEmpty() && password == passwordRepeat
     }
 
     private fun initObservers() {
@@ -60,15 +62,15 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
     private fun checkStatus(status: Status) {
         when (status) {
             Status.LOADING -> {
-                register_loading_Pb.visibility = View.VISIBLE
+                login_loading_Pb.visibility = View.VISIBLE
                 Toast.makeText(requireContext(), "Loading", Toast.LENGTH_SHORT).show()
             }
             Status.DONE -> {
-                register_loading_Pb.visibility = View.GONE
+                login_loading_Pb.visibility = View.GONE
                 findNavController().navigate(R.id.lobbyFragment)
             }
             Status.ERROR -> {
-                register_loading_Pb.visibility = View.GONE
+                login_loading_Pb.visibility = View.GONE
                 Toast.makeText(requireContext(), "Error", Toast.LENGTH_SHORT).show()
             }
         }
