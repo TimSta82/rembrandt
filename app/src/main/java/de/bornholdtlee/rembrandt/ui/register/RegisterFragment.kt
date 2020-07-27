@@ -19,6 +19,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
 
     private val viewModel: RegisterViewModel by lazy { ViewModelProviders.of(this).get(RegisterViewModel::class.java) }
     private lateinit var auth: FirebaseAuth
+    private var email = ""
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -38,12 +39,12 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
     }
 
     private fun registerUser() {
-        val email = register_user_email_Et.text.toString().trim()
+        email = register_user_email_Et.text.toString().trim()
         val password = register_user_password_Et.text.toString().trim()
         val passwordRepeat = register_user_password_repeat_Et.text.toString().trim()
 
         if (email.isNotEmpty() && passwordIsValid(password, passwordRepeat)) {
-            viewModel.registerUser(auth, email, password)
+            viewModel.registerUser(email, password)
         } else {
             Toast.makeText(requireContext(), TAG + " password is invalid", Toast.LENGTH_SHORT).show()
         }
