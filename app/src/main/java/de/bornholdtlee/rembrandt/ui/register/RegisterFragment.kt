@@ -17,7 +17,9 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
         val TAG = RegisterFragment::class.java.name
     }
 
-    private val viewModel: RegisterViewModel by lazy { ViewModelProviders.of(this).get(RegisterViewModel::class.java) }
+    private val viewModel: RegisterViewModel by lazy {
+        ViewModelProviders.of(this).get(RegisterViewModel::class.java)
+    }
     private lateinit var auth: FirebaseAuth
 
 
@@ -31,6 +33,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
     }
 
     private fun initViews() {
+        register_loading_Pb.visibility = View.GONE
     }
 
     private fun initListeners() {
@@ -38,18 +41,19 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
     }
 
     private fun registerUser() {
-        val name = register_user_name_Et.text.toString().trim()
         val email = register_user_email_Et.text.toString().trim()
         val password = register_user_password_Et.text.toString().trim()
         val passwordRepeat = register_user_password_repeat_Et.text.toString().trim()
 
-        if (name.isNotBlank() && email.isNotEmpty() && password.isNotEmpty() && passwordRepeat.isNotEmpty()) {
-            if (password == passwordRepeat) {
-                viewModel.registerUser(auth, name, email, password)
-            } else {
-                Toast.makeText(requireContext(), TAG + " password is invalid", Toast.LENGTH_SHORT).show()
-            }
+        if (email.isNotEmpty() && passwordIsValid(password, passwordRepeat)) {
+            viewModel.registerUser(auth, email, password)
+        } else {
+            Toast.makeText(requireContext(), TAG + " password is invalid", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun passwordIsValid(password: String, passwordRepeat: String): Boolean {
+        return password.length > 5 && password.isNotEmpty() && passwordRepeat.isNotEmpty() && password == passwordRepeat
     }
 
     private fun initObservers() {
@@ -58,10 +62,18 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
 
     private fun checkStatus(status: Status) {
         when (status) {
-            Status.LOADING -> Toast.makeText(requireContext(), "Loading", Toast.LENGTH_SHORT).show()
-            Status.DONE -> findNavController().navigate(R.id.lobbyFragment)
-            Status.ERROR -> Toast.makeText(requireContext(), "Error", Toast.LENGTH_SHORT).show()
+            Status.LOADING -> {
+                register_loading_Pb.visibility = View.VISIBLE
+                Toast.makeText(requireContext(), "Loading", Toast.LENGTH_SHORT).show()
+            }
+            Status.DONE -> {
+                register_loading_Pb.visibility = View.GONE
+                findNavController().navigate(R.id.lobbyFragment)
+            }
+            Status.ERROR -> {
+                register_loading_Pb.visibility = View.GONE
+                Toast.makeText(requireContext(), "Error", Toast.LENGTH_SHORT).show()
+            }
         }
     }
-
 }

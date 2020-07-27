@@ -1,6 +1,13 @@
 <resources>
     <string name="app_name">Rembrandt</string>
+
+    <!--    Fragments   -->
     <string name="register_fragment_user_name_hint">Whats your name</string>
     <string name="register_fragment_user_email_hint">Your email pls</string>
-    <string name="register_fragment_submit_user_btn">login</string>
+    <string name="register_fragment_user_password_hint">Password</string>
+    <string name="register_fragment_submit_user_btn">Register</string>
+    <string name="login_fragment_submit_user_btn">Login</string>
+    <string name="fragment_login_forgot_password">Password vergessen?</string>
+    <string name="fragment_login_register_user">Registrieren</string>
+
 </resources>

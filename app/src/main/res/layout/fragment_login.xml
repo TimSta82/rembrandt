@@ -8,7 +8,7 @@
     android:layout_margin="@dimen/two_grid_unit">
 
     <EditText
-        android:id="@+id/register_user_email_Et"
+        android:id="@+id/login_user_email_Et"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="@string/register_fragment_user_email_hint"
@@ -18,35 +18,43 @@
         tools:text="t@s.com" />
 
     <EditText
-        android:id="@+id/register_user_password_Et"
+        android:id="@+id/login_user_password_Et"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Password"
+        android:hint="@string/register_fragment_user_password_hint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/register_user_email_Et" />
-
-
-    <EditText
-        android:id="@+id/register_user_password_repeat_Et"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="Password repeat"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/register_user_password_Et" />
+        app:layout_constraintTop_toBottomOf="@+id/login_user_email_Et" />
 
     <Button
-        android:id="@+id/register_submit_user_Btn"
+        android:id="@+id/login_submit_user_Btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/register_fragment_submit_user_btn"
+        android:text="@string/login_fragment_submit_user_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/register_user_password_repeat_Et" />
+        app:layout_constraintTop_toBottomOf="@+id/login_user_password_Et" />
+
+    <TextView
+        android:id="@+id/login_forgot_password_Tv"
+        android:layout_width="match_parent"
+        android:text="@string/fragment_login_forgot_password"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/login_submit_user_Btn" />
+
+    <TextView
+        android:id="@+id/login_register_Tv"
+        android:layout_width="match_parent"
+        android:text="@string/fragment_login_register_user"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/login_forgot_password_Tv" />
 
     <ProgressBar
-        android:id="@+id/register_loading_Pb"
+        android:id="@+id/login_loading_Pb"
         android:layout_width="@dimen/seven_grid_unit"
         android:layout_height="@dimen/seven_grid_unit"
         android:visibility="gone"

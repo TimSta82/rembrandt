@@ -20,6 +20,7 @@
     </fragment>
     <fragment
         android:id="@+id/lobbyFragment"
+        tools:layout="@layout/fragment_lobby"
         android:name="de.bornholdtlee.rembrandt.ui.lobby.LobbyFragment"
         android:label="LobbyFragment" />
 </navigation>

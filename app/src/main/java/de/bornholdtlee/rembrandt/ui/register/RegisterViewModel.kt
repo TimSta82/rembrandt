@@ -11,13 +11,12 @@ enum class Status {
 
 class RegisterViewModel: ViewModel() {
 
-    private val _status = MutableLiveData<Status>().apply { value = Status.LOADING }
+    private val _status = MutableLiveData<Status>()
 
     val status: LiveData<Status> = _status
 
-    fun registerUser(auth: FirebaseAuth, name: String, email: String, password: String) {
+    fun registerUser(auth: FirebaseAuth, email: String, password: String) {
         _status.value = Status.LOADING
-
         try {
             auth.createUserWithEmailAndPassword(email, password)
             _status.value = Status.DONE
