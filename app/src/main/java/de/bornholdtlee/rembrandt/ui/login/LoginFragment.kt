@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import de.bornholdtlee.rembrandt.R
+import de.bornholdtlee.rembrandt.ui.lobby.LobbyActivity
 import de.bornholdtlee.rembrandt.ui.register.Status
 import kotlinx.android.synthetic.main.fragment_login.*
 
@@ -67,7 +68,8 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
             }
             Status.DONE -> {
                 login_loading_Pb.visibility = View.GONE
-                findNavController().navigate(R.id.lobbyFragment)
+                LobbyActivity.startActivity(requireContext(), "test456")
+//                findNavController().navigate(R.id.lobbyFragment)
             }
             Status.ERROR -> {
                 login_loading_Pb.visibility = View.GONE

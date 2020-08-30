@@ -33,9 +33,9 @@ class RegisterViewModel: ViewModel() {
         }
     }
 
-    private fun savePlayerInDatabase(email: String, uid: String?) {
-        val player = Player(uid, "Egon", email)
-        uid?.let { database.child("players").child(it).setValue(player) }
+    private fun savePlayerInDatabase(email: String, firebaseUserUid: String?) {
+        val player = Player(firebaseUserUid, "Egon", email)
+        firebaseUserUid?.let { database.child("players").child(it).setValue(player) }
         _status.value = Status.DONE
     }
 }
