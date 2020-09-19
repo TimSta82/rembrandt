@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
@@ -19,7 +18,9 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         val TAG = LoginFragment::class.java.name
     }
 
-    private val viewModel: LoginViewModel by lazy { ViewModelProviders.of(this).get(LoginViewModel::class.java) }
+    private val viewModel: LoginViewModel by lazy {
+        ViewModelProviders.of(this).get(LoginViewModel::class.java)
+    }
     private lateinit var auth: FirebaseAuth
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -50,14 +51,15 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         val password = login_user_password_Et.text.toString().trim()
 
         if (email.isNotEmpty() && password.isNotEmpty()) {
-            viewModel.loginUser(auth, email, password)
+            viewModel.loginUser(email, password)
         } else {
-            Toast.makeText(requireContext(), TAG + " password is invalid", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), TAG + " password is invalid", Toast.LENGTH_SHORT)
+                .show()
         }
     }
 
     private fun initObservers() {
-        viewModel.status.observe(viewLifecycleOwner, Observer { checkStatus(it) })
+        viewModel.status.observe(viewLifecycleOwner, { checkStatus(it) })
     }
 
     private fun checkStatus(status: Status) {
@@ -68,8 +70,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
             }
             Status.DONE -> {
                 login_loading_Pb.visibility = View.GONE
-                LobbyActivity.startActivity(requireContext(), "test456")
-//                findNavController().navigate(R.id.lobbyFragment)
+                LobbyActivity.startActivity(requireContext())
             }
             Status.ERROR -> {
                 login_loading_Pb.visibility = View.GONE

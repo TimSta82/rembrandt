@@ -14,5 +14,13 @@
             android:name="uid"
             app:argType="string"
             android:defaultValue='"-1"' />
+        <argument
+            android:name="name"
+            app:argType="string"
+            android:defaultValue='"-1"' />
+        <argument
+            android:name="email"
+            app:argType="string"
+            android:defaultValue='"-1"' />
     </fragment>
 </navigation>

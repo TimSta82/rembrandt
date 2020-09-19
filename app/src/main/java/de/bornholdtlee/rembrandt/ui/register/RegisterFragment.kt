@@ -67,8 +67,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
             }
             Status.DONE -> {
                 register_loading_Pb.visibility = View.GONE
-                LobbyActivity.startActivity(requireContext(),"test123")
-//                findNavController().navigate(R.id.lobbyFragment)
+                findNavController().navigate(R.id.loginFragment)
             }
             Status.ERROR -> {
                 register_loading_Pb.visibility = View.GONE
