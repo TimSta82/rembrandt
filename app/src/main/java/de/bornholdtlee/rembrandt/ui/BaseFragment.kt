@@ -1,4 +1,4 @@
-package de.bornholdtlee.rembrandt
+package de.bornholdtlee.rembrandt.ui
 
 import androidx.fragment.app.Fragment
 

@@ -6,7 +6,7 @@
 
     <activity
         android:id="@+id/mainActivity"
-        android:name="de.bornholdtlee.rembrandt.MainActivity"
+        android:name="de.bornholdtlee.rembrandt.ui.MainActivity"
         android:label="activity_main"
         tools:layout="@layout/activity_main" />
     <fragment

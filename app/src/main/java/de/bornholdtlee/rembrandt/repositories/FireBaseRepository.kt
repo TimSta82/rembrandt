@@ -11,6 +11,11 @@ class FireBaseRepository(val context: Context) : BaseRepository() {
 
     private var database: DatabaseReference = Firebase.database.reference
     private var auth: FirebaseAuth = FirebaseAuth.getInstance()
+    private val firebaseUser = auth.currentUser
+
+    fun isLoggedIn(): Boolean {
+        return firebaseUser != null
+    }
 
     fun registerUser(email: String, password: String) {
         try {
@@ -28,18 +33,28 @@ class FireBaseRepository(val context: Context) : BaseRepository() {
         }
     }
 
+    fun logoutUser() {
+        try {
+            auth.signOut()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
     fun getUser(): Player {
         val player = Player("", "", "")
         try {
-            val email = auth.currentUser?.email
-            val uid = auth.currentUser?.uid
-            val name = "norbert"
-            email?.let { email ->
-                uid?.let { uid ->
-                    player.email = email
-                    player.uid = uid
-                    player.name = name
-                }
+//            auth.addAuthStateListener {a ->
+//                when (a) {
+//
+//                }
+//
+//            }
+            val user = auth.currentUser
+            user?.let {
+                player.email = user.email
+                player.uid = user.uid
+                player.name = "norberto"
             }
             return player
         } catch (e: Exception) {
